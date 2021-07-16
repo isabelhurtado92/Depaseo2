@@ -74,8 +74,8 @@ public class RouteController {
 				routeFound.get().setName(route.getName());
 			if (route.getType() != null)
 				routeFound.get().setType(route.getType());
-			if (route.getLocation() != null)
-				routeFound.get().setLocation(route.getLocation());
+			//if (route.getLocation() != null)
+				//routeFound.get().setLocation(route.getLocation());   //MUY IMPORTANTE EDITARRRRRRRRRRRRRRRRRRRRRRRRR CUANDO DECIDAMOS CÓMO AÑADIR
 			
 			routeRepository.save(routeFound.get());
 			return "redirect:/route/allroutes";
