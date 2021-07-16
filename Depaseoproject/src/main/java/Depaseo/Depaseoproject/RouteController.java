@@ -1,183 +1,142 @@
 package Depaseo.Depaseoproject;
 
-
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import dev.example.employeeCourse.boot.model.Employee;
-import dev.example.employeeCourse.boot.model.Enrollment;
-import dev.example.employeeCourse.boot.repository.CertificateRepository;
-import dev.example.employeeCourse.boot.repository.CourseRepository;
-import dev.example.employeeCourse.boot.repository.EmployeeRepository;
-
 
 @Controller
-@RequestMapping("/employee")
+@RequestMapping("/routecontroller")
 
 public class RouteController {
-	@Autowired
-	EmployeeRepository employeeRepository;
 	
 	@Autowired
-	CourseRepository courseRepository;
+	RouteRepository routeRepository;
 	
-	@Autowired
-	CertificateRepository certificateRepository;
-
-	@RequestMapping("/allEmployees")
-	public String getAllEmployees(Model boxToView) {
-
-		boxToView.addAttribute("employeeListfromControllerAndDB", 
-				employeeRepository.findAll());
-
-		return "employee/employees";
-	}
-
-	//-----------------------delete----------------------------------
-	@RequestMapping("/deleteEmployee")
-	public String removeEmployee(int id, Model model) {
-
-		// System.out.println("inside removeEmployee" + id);
-		Optional<Employee> employeeFound = findOneEmployeeById(id);
-
-		// System.out.println("find inside removeEmployee" + employeeFound.get());
-
-		if (employeeFound.isPresent()) {
-
-			employeeRepository.deleteById(id);
-			model.addAttribute("message", "done");
-			model.addAttribute("employeeDeleted", employeeFound.get());
-		}
-
-		else {
-			model.addAttribute("message", "error");
-		}
-
-		// System.out.println("finishing removeEmployee" + id);
-		return "employee/deletedemployee.html";
-	}
-
-	@RequestMapping("/deleteAllEmployees")
-	public String deleteAllEmployees () {
-
+	
+//-----------CRUD----------------
 		
-		 employeeRepository.deleteAll();
+	
+	@RequestMapping("/allroutes")
+	public String getAllUsers(Model boxToView) {
+
+		boxToView.addAttribute("routesfromController", routeRepository.findAll());
 		
-
-		return "redirect:/employee/allEmployees";
-
-	}
-	
-	//-----------------------add----------------------------------
-	@RequestMapping("/newEmployee")
-	public String newEmpoyee() {
-
-		return "employee/newemployee.html";
-	}
-
-	@RequestMapping("/addEmployee")
-	public String inserEmployee(Employee employee) {
-
-		employeeRepository.save(employee);
-
-		return "redirect:/employee/allEmployees";
-	}
-
-	//-----------------------update----------------------------------
-	@RequestMapping("/updateEmployee")
-	public String updateEmpoyee(int id, Model model) {
-
-		Optional<Employee> employeeFound = findOneEmployeeById(id);
-
-		if (employeeFound.isPresent()) {
-
-			model.addAttribute("employeefromController", employeeFound.get());
-			return "employee/updateemployee";
-		}
-
-		else
-			return "home/notfound.html";
-	}
-
-	@PostMapping("/replaceEmployee/{idFromView}")
-	public String replaceEmployee(@PathVariable("idFromView") int id, Employee employee) {
-
-		Optional<Employee> employeeFound = findOneEmployeeById(id);
-
-		if (employeeFound.isPresent()) {
-
-			if (employee.getName() != null)
-				employeeFound.get().setName(employee.getName());
-			if (employee.getSurname() != null)
-				employeeFound.get().setSurname(employee.getSurname());
-			if (employee.getPassword() != null)
-				employeeFound.get().setPassword(employee.getPassword());
-			if (employee.getEmail() != null)
-				employeeFound.get().setEmail(employee.getEmail());
-			if (employee.getAge() != 0)
-				employeeFound.get().setAge(employee.getAge());
-			if (employee.getMonthSalary() != 0.0)
-				employeeFound.get().setMonthSalary(employee.getMonthSalary());
-
-			employeeRepository.save(employeeFound.get());
-			return "redirect:/employee/allEmployees";
-
-		} else
-			return "home/notfound.html";
+		return "route/getallroutes"; //is it ok??
 
 	}
 	
-	//-----------------------detail----------------------------------
-	@RequestMapping("/detailEmployee")
-	public String detailEmployee(int id, Model model) {
+	//Create:
+	
+	@RequestMapping("/newroute")
+	public String newRoute() {
+		
+		return "route/newroute";
 
-		Optional<Employee> employeeFound = findOneEmployeeById(id);
+	}
 
-		if (employeeFound.isPresent()) {
+	@RequestMapping("/addroute")
+	public String addRoute(Route route) { 
 
-			model.addAttribute("employeefromController", employeeFound.get());
+		routeRepository.save(route);
+
+		return "redirect:/route/allroutes";
+	}
+
+	//update:
+	//2 steps: find and replace information
+	@RequestMapping("/updateroute")
+	public String updateRoute(int id, Model model) {
+		
+		Optional<Route> routeFound = findOneRouteById(id);
+		
+		if (routeFound.isPresent()) {
 			
-			return "employee/detailemployee";
+			model.addAttribute("routefromController", routeFound.get());
+			return "updateroute";
 		}
-
-		else
+		
 			return "home/notfound.html";
 	}
+
+	@PostMapping("/modifyroute/{idFromView}")
+	public String modifyRoute(@PathVariable("idFromView") int id, Route route) {
+
+		Optional<Route> routeFound = findOneRouteById(id);
+
+		if (routeFound.isPresent()) {
+
+			if (route.getName() != null)
+				routeFound.get().setName(route.getName());
+			if (route.getType() != null)
+				routeFound.get().setType(route.getType());
+			if (route.getLocation() != null)
+				routeFound.get().setLocation(route.getLocation());
+			
+			routeRepository.save(routeFound.get());
+			return "redirect:/route/allroutes";
+
+		} 
+			return "home/notfound.html";
+
+	}
 	
-	//----------------------- enrollment ----------------------------------
-		@RequestMapping("/addCourse")
-		public String addCourseEmployee(int id, Model model) {
+	
+	//delete:
+	//2 steps: find & delete
+			
+			@RequestMapping("/deleteroute")
+			public String deleteroute(int id, Model model) {
+				Optional<Route> routeFound = routeRepository.findOneRouteById(id);
 
-			Optional<Employee> employeeFound = findOneEmployeeById(id);
 
-			if (employeeFound.isPresent()) {
-
-				model.addAttribute("employeefromController", employeeFound.get());
-				model.addAttribute("coursesfromController", courseRepository.findAll());
-				model.addAttribute("certificatesfromController", certificateRepository.findAll());
-				
-				return "employee/addcourseemployee";
+				if (routeFound.isPresent()) {
+					routeRepository.deleteById(id);
+				model.addAttribute("message", "done");
+				model.addAttribute("routeDeleted", routeFound.get());
 			}
 
-			else
-				return "home/notfound.html";
+			else {
+				model.addAttribute("message", "error");
+			}
+
+			
+			return "route/deletedroute.html";
+		}
+
+		@RequestMapping("/deleteallroutes")
+		public String deleteAllRoutes () {
+
+			
+			routeRepository.deleteAll();
+			
+
+			return "redirect:/route/allroutes";
+
 		}
 	
-//--------------------------------------------------------------------------------
-//------------------------- service to controller --------------------------------
-//--------------------------------------------------------------------------------
 
-	public Optional<Employee> findOneEmployeeById(int id) {
+	
+//Service:
 
-		// System.out.println("inside findEmployee" + id);
-		Optional<Employee> employeeFound = employeeRepository.findById(id);
-		// System.out.println("finishing findEmployee" + id);
-		// System.out.println("finishing findEmployee" + employeeFound.get());
-		return employeeFound;
+		
+		public Optional<Route> findOneRouteById(int id) {
+			
+			Optional<Route> routeFound = routeRepository.findOneRouteById(id);
+			
+			return routeFound;
 	}
+		
+
+		public String notFound (Model model) {
+			
+			return "notfound";
+	
+}
+
 
 }

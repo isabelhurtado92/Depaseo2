@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/usercontroller")
 
 public class UserController {
 	
