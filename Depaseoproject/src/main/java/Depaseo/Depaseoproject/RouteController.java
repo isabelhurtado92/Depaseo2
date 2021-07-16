@@ -91,7 +91,7 @@ public class RouteController {
 			
 			@RequestMapping("/deleteroute")
 			public String deleteroute(int id, Model model) {
-				Optional<Route> routeFound = routeRepository.findOneRouteById(id);
+				Optional<Route> routeFound = findOneRouteById(id);
 
 
 				if (routeFound.isPresent()) {

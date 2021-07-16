@@ -95,13 +95,10 @@ public class UserController {
 	
 		@RequestMapping("/deleteuser")
 		public String removeUser(int id, Model model) {
-
-			
 			Optional<User> userFound = findOneUserById(id);
 
 
 			if (userFound.isPresent()) {
-
 				userRepository.deleteById(id);
 				model.addAttribute("message", "done");
 				model.addAttribute("userDeleted", userFound.get());
