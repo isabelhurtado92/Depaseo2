@@ -124,12 +124,13 @@ public class RouteController {
 		
 		public Optional<Route> findOneRouteById(int id) {
 			
-			Optional<Route> routeFound = routeRepository.findOneRouteById(id);
+			Optional<Route> routeFound = routeRepository.findById(id);
 			
 			return routeFound;
 	}
 		
-
+		
+		
 		public String notFound (Model model) {
 			
 			return "notfound";
