@@ -37,7 +37,7 @@ public class UserController {
 	@RequestMapping("/newuser")
 	public String newUser() {
 
-		return "user/newuser.html";
+		return "newuser.html";
 	}
 
 	@RequestMapping("/adduser")
@@ -45,7 +45,7 @@ public class UserController {
 
 		userRepository.save(user);
 
-		return "redirect:/user/allusers";
+		return "home";
 	}
 
 	//update:

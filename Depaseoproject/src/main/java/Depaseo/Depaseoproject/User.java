@@ -1,6 +1,7 @@
 package Depaseo.Depaseoproject;
 
 import java.util.ArrayList; // import object.Ruta;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity; // intitat aplication properties - conección con BD H2
@@ -32,7 +33,7 @@ public class User {
 //Defining relationship type: One to Many
 	
 	@OneToMany (mappedBy= "user", cascade = CascadeType.ALL)
-	public ArrayList<Route> routes;
+	public List<Route> routes = new ArrayList<>();
 	
 	
 	
@@ -123,7 +124,7 @@ public class User {
 		this.isBlocked = isBlocked;
 	}
 
-	public ArrayList<Route> getRoutes() {
+	public List<Route> getRoutes() {
 		return routes;
 	}
 
