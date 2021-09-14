@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+
+
+<title>Nueva ruta</title>
+</head>
+<body>
+<!-- Fragment -->
+<div layout:fragment="content">
+
+<div class="w3-container w3-padding-32" id="Formulario">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Crea tu ruta</h3>
+    <p>Rellena estos datos, por favor</p>
+   <form th:action="addroute">
+      <input class="w3-input w3-border" name="name" placeholder="Nombre" type="text" required>
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Tipo de ruta: gastronómica, ocio nocturno, familiar..." required name="type">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Localización en Plus Code: ej C48M+Q5 Barcelona" required name="location">     
+      <button class="w3-btn w3-teal">Guardar ruta</button>
+
+      </form>
+
+</div>
+
+</div>
+</body>
+</html>

@@ -25,9 +25,6 @@ public class User {
 	public String userName;
 	public String email;
 	public String password;
-	public boolean isValidated = false;
-	public boolean isBlocked = false;
-  //public HashMap<String, Ruta> rutes;
 
 	
 //Defining relationship type: One to Many
@@ -40,7 +37,7 @@ public class User {
 //--------Constructor-------------
 	
 	public User(String name, String surname, String userName, String email, String password,
-			boolean isValidated, boolean isBlocked, ArrayList<Route> routes) {
+			ArrayList<Route> routes) {
 		super();
 		//this.id = id; innecesario porque el @id de JPA ya me lo crea
 		this.name = name;
@@ -48,16 +45,23 @@ public class User {
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
-		this.isValidated = isValidated;
-		this.isBlocked = isBlocked;
-		this.routes = routes;
 	}
 
 
 	public User() {
 		super();}
-	
-	
+
+
+
+	public User(int id, String name, String userName, String email, String password) {
+		super();
+		this.name = name;
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+	}
+
+
 // -----Getters and Setters----------
 
 	public int getId() {
@@ -108,22 +112,6 @@ public class User {
 		this.password = password;
 	}
 
-	public boolean isValidated() {
-		return isValidated;
-	}
-
-	public void setValidated(boolean isValidated) {
-		this.isValidated = isValidated;
-	}
-
-	public boolean isBlocked() {
-		return isBlocked;
-	}
-
-	public void setBlocked(boolean isBlocked) {
-		this.isBlocked = isBlocked;
-	}
-
 	public List<Route> getRoutes() {
 		return routes;
 	}
@@ -137,8 +125,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", userName=" + userName + ", email="
-				+ email + ", password=" + password + ", isValidated=" + isValidated + ", isBlocked=" + isBlocked
-				+ ", routes=" + routes + "]";
+				+ email + ", password=" + password + ", routes=" + routes + "]";
 		
 	}
 }

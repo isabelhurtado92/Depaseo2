@@ -15,18 +15,13 @@
 <div class="w3-container w3-padding-32" id="Formulario">
     <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Registrarse</h3>
     <p>Rellena estos datos, por favor</p>
-   <form action="adduser">
+   <form th:action="adduser">
       <input class="w3-input w3-border" name="name" placeholder="Nombre" type="text" required>
-      <input class="w3-input w3-section w3-border" type="text" placeholder="Nombre de usuario" required name="username">
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Nombre de usuario" required name="userName">
       <input class="w3-input w3-section w3-border" type="text" placeholder="Email" required name="email">
-      <input class="w3-input w3-section w3-border" type="text" placeholder="Constraseña" required name="password">
-      
-  <!--    <input class="w3-input w3-border w3-light-grey" name="surname" placeholder="doe" type="text"> -->
+      <input class="w3-input w3-section w3-border" type="text" placeholder="Constraseña" required name="password">     
+      <button class="w3-btn w3-teal">Crear usuario</button>
 
-     
-      <button class="w3-btn w3-teal">create user</button>
-     <!--  <a th:action="@{/usercontroller/adduser}" th:object = "${user}" class="w3-bar-item w3-button">REGISTRARME</a> -->
-      
       </form>
 
 </div>

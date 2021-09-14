@@ -17,9 +17,8 @@ public class Route {
 	private int id;
 	public String name;
 	public String type; // Gastronomico, Historico, Arquitectónico, familiar, Ocio Nocturno...
-	public int location; 
-	//public HashMap<String, Route> routes; // este hashmap nos permitirá guardar objetos con las informaciones
-                                          //de geolocalización y asociarlos a un tag.
+	public String location; 
+	
 	
 	
 	//Defining relationship type: Many to One
@@ -29,7 +28,7 @@ public class Route {
 	
 	//--------Constructor-------------
 	
-	public Route(String name, String type, int location, User user) {
+	public Route(String name, String type, String location, User user) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -61,18 +60,13 @@ public class Route {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public int getLocation() {
+	public String getLocation() {
 		return location;
 	}
-	public void setLocation(int location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
-	/*public HashMap<String, Route> getRoutes() {
-		return routes;
-	}
-	public void setRoutes(HashMap<String, Route> routes) {
-		this.routes = routes;
-	}*/
+	
 	
 	//------ToString------------
 	

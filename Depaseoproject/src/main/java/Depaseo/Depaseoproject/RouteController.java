@@ -22,11 +22,11 @@ public class RouteController {
 		
 	
 	@RequestMapping("/allroutes")
-	public String getAllUsers(Model boxToView) {
+	public String getAllroutes(Model boxToView) {
 
 		boxToView.addAttribute("routesfromController", routeRepository.findAll());
 		
-		return "route/getallroutes"; //is it ok??
+		return "allroutes"; 
 
 	}
 	
@@ -35,7 +35,7 @@ public class RouteController {
 	@RequestMapping("/newroute")
 	public String newRoute() {
 		
-		return "route/newroute";
+		return "newroute";
 
 	}
 
@@ -44,7 +44,7 @@ public class RouteController {
 
 		routeRepository.save(route);
 
-		return "redirect:/route/allroutes";
+		return "redirect:/routecontroller/allroutes";
 	}
 
 	//update:
@@ -60,7 +60,7 @@ public class RouteController {
 			return "updateroute";
 		}
 		
-			return "home/notfound.html";
+			return "notFound.html";
 	}
 
 	@PostMapping("/modifyroute/{idFromView}")
@@ -78,10 +78,10 @@ public class RouteController {
 				//routeFound.get().setLocation(route.getLocation());   //MUY IMPORTANTE EDITARRRRRRRRRRRRRRRRRRRRRRRRR CUANDO DECIDAMOS CÓMO AÑADIR
 			
 			routeRepository.save(routeFound.get());
-			return "redirect:/route/allroutes";
+			return "redirect:/allroutes";
 
 		} 
-			return "home/notfound.html";
+			return "notFound.html";
 
 	}
 	
@@ -90,7 +90,7 @@ public class RouteController {
 	//2 steps: find & delete
 			
 			@RequestMapping("/deleteroute")
-			public String deleteroute(int id, Model model) {
+			public String deleteRoute(int id, Model model) {
 				Optional<Route> routeFound = findOneRouteById(id);
 
 
@@ -105,7 +105,7 @@ public class RouteController {
 			}
 
 			
-			return "route/deletedroute.html";
+			return "deletedroute.html";
 		}
 
 		@RequestMapping("/deleteallroutes")
@@ -115,7 +115,7 @@ public class RouteController {
 			routeRepository.deleteAll();
 			
 
-			return "redirect:/route/allroutes";
+			return "redirect:/allroutes";
 
 		}
 	
@@ -133,7 +133,7 @@ public class RouteController {
 		
 		public String notFound (Model model) {
 			
-			return "notfound";
+			return "notFound.html";
 	
 }
 

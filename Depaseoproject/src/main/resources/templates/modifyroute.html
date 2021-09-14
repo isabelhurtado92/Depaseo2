@@ -1,0 +1,45 @@
+<html>
+<title>Welcome to my Spring Boot Project</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="ISO-8859-1">
+<title>Fill in</title>
+</head>
+<body>
+	<div class="w3-container w3-card">
+		<h2>All routes</h2>
+		<p>from routesDB</p>
+	</div>
+	<div class="w3-card-4 w3-display-middle" style="width: 40%"
+		th:each="route:${routeController}">
+		<header class="w3-container w3-light-grey">
+			<h3 th:text="${route.name} + ' ' + ${route.type}"></h3>
+		</header>
+		<div class="w3-container">
+			<p>1 new friend request</p>
+			<p></p>
+			<hr>
+			<img src="/images/home/img_avatar.jpg" alt="Avatar"
+				class="w3-left w3-circle w3-margin-right" style="width: 60px">
+			<p>CEO at Mighty Schools. Marketing and Advertising. Seeking a
+				new job and new opportunities.</p>
+			<br>
+			<p th:text="${route.name}"></p>
+			<p th:text="${route.type}"></p>
+			<p th:text="${route.location}"></p>
+			
+			<hr>
+			<div class="w3-container w3-center">
+			<a th:href="@{updateRoute(id=${route.id})}"
+					class="w3-button w3-red w3-center">Update</a>
+			 <a	th:href="@{deleteRoute(id=${route.id})}"
+					class="w3-button w3-blue">Delete</a></td><hr></div>
+		</div>
+		<button class="w3-button w3-block w3-dark-grey">+ Connect</button>
+	</div>
+	</div>
+</body>
+</html>

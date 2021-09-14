@@ -28,9 +28,14 @@ public class UserController {
 		boxToView.addAttribute("userListfromControllerAndDB", 
 				userRepository.findAll());
 
-		return "user/userss";
+		return "user/users";
 	}
+	
+	@RequestMapping("/userhome")
+	public String userhome() {
 
+		return "userhome.html";
+	}
 	
 	//Create:
 	
@@ -42,10 +47,12 @@ public class UserController {
 
 	@RequestMapping("/adduser")
 	public String insertUser(User user) {
+		
+		System.out.println(user);
 
 		userRepository.save(user);
 
-		return "home";
+		return "home.html";
 	}
 
 	//update:
@@ -62,7 +69,7 @@ public class UserController {
 		}
 
 		else
-			return "home/notfound.html";
+			return "notFound.html";
 	}
 
 	@PostMapping("/replaceuser/{idFromView}")
@@ -86,7 +93,7 @@ public class UserController {
 			return "redirect:/user/allusers";
 
 		} else
-			return "home/notfound.html";
+			return "notFound.html";
 
 	}
 	
@@ -109,7 +116,7 @@ public class UserController {
 			}
 
 			
-			return "user/deleteduser.html";
+			return "deleteduser.html";
 		}
 
 		@RequestMapping("/deleteallusers")
@@ -119,7 +126,7 @@ public class UserController {
 			userRepository.deleteAll();
 			
 
-			return "redirect:/user/allusers";
+			return "redirect:/allusers";
 
 		}
 	
@@ -138,7 +145,7 @@ public class UserController {
 		}
 
 		else
-			return "home/notfound.html";
+			return "notFound.html";
 	}
 	
 
